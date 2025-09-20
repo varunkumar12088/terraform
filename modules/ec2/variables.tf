@@ -47,3 +47,13 @@ variable "policy_arn" {
     type        = string
     default     = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
+
+variable "vpc_id" {
+    description = "The ID of the VPC"
+    type        = string
+}
+
+variable "private_subnet_ids" {
+    description = "List of private subnet IDs"
+    type        = list(string)
+}

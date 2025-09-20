@@ -1,7 +1,7 @@
 resource "aws_security_group" "learning_k8s_app_sg" {
   name        = "learning_k8s_app_sg"
   description = "Security group for app server with SSM and HTTPS"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = var.vpc_id
 
   # Allow inbound HTTPS from anywhere (if public-facing)
   ingress {
@@ -57,7 +57,7 @@ resource "aws_instance" "ids" {
     count         = var.instance_count
     ami           = var.ami_id
     instance_type = var.instance_type
-    subnet_id     = module.vpc.private_subnet_ids[count.index % length(module.vpc.private_subnet_ids)]
+    subnet_id     = var.private_subnet_ids[count.index % length(var.private_subnet_ids)]
     vpc_security_group_ids = [ aws_security_group.learning_k8s_app_sg.id ]
     iam_instance_profile = aws_iam_instance_profile.ec2_ssm.name
     associate_public_ip_address = false
