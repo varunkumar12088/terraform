@@ -62,6 +62,6 @@ resource "aws_instance" "ids" {
     iam_instance_profile = aws_iam_instance_profile.ec2_ssm.name
     associate_public_ip_address = false
     tags = {
-        Name = var.instance_name + "-${count.index + 1}"
+        Name = "${var.instance_name}-${count.index + 1}"
     }
 }
