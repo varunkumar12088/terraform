@@ -5,15 +5,15 @@ resource "aws_vpc" "vpc-learning-k8s" {
     }
 }
 
-resource "aws_subnet" "k8s-public-subnet" {
-    count                   = length(var.public_subnet_cidrs)
-    vpc_id                  = aws_vpc.vpc-learning-k8s.id
-    cidr_block              = var.public_subnet_cidrs[count.index]
-    availability_zone       = element(var.ap-vailability_zones, count.index)
-    tags = {
-        Name = "Public-Subnet: Public Subnet ${count.index + 1}"
-    }
-}
+#resource "aws_subnet" "k8s-public-subnet" {
+#    count                   = length(var.public_subnet_cidrs)
+#    vpc_id                  = aws_vpc.vpc-learning-k8s.id
+#    cidr_block              = var.public_subnet_cidrs[count.index]
+#    availability_zone       = element(var.ap-vailability_zones, count.index)
+#    tags = {
+#        Name = "Public-Subnet: Public Subnet ${count.index + 1}"
+#    }
+#}
 
 resource "aws_subnet" "k8s-private-subnet" {
     count               = length(var.private_subnet_cidrs)
@@ -25,12 +25,12 @@ resource "aws_subnet" "k8s-private-subnet" {
     }
 }
 
-resource "aws_internet_gateway" "k8s-public-igw" {
-    vpc_id = aws_vpc.vpc-learning-k8s.id
-    tags = {
-        Name = "Internet-Gateway: IGW for VPC"
-    }   
-}
+#resource "aws_internet_gateway" "k8s-public-igw" {
+#    vpc_id = aws_vpc.vpc-learning-k8s.id
+#    tags = {
+#        Name = "Internet-Gateway: IGW for VPC"
+#    }   
+#}
 
 resource "aws_eip" "k8s-nat-eip" {
     count = length(var.private_subnet_cidrs)
@@ -50,18 +50,18 @@ resource "aws_nat_gateway" "k8s-nat-gateway" {
     }   
 }
 
-resource "aws_route_table" "k8s-public-rt" {
-    vpc_id      = aws_vpc.vpc-learning-k8s.id
-    depends_on = [ aws_internet_gateway.k8s-public-igw ]
-    route {
-        cidr_block = "0.0.0.0/0"
-        gateway_id = aws_internet_gateway.k8s-public-igw.id
-    }
-    tags = {
-        Name = "public route table"
-        description = "This is public route table"
-    }   
-}
+#resource "aws_route_table" "k8s-public-rt" {
+#    vpc_id      = aws_vpc.vpc-learning-k8s.id
+#    depends_on = [ aws_internet_gateway.k8s-public-igw ]
+#    route {
+#        cidr_block = "0.0.0.0/0"
+#        gateway_id = aws_internet_gateway.k8s-public-igw.id
+#    }
+#    tags = {
+#        Name = "public route table"
+#        description = "This is public route table"
+#    }   
+#}
 
 resource "aws_route_table" "k8s-private-rt" {
     count       = length(var.private_subnet_cidrs)
