@@ -45,7 +45,8 @@ resource "aws_nat_gateway" "k8s-nat-gateway" {
     allocation_id  = aws_eip.k8s-nat-eip[count.index].id
     subnet_id      = aws_subnet.k8s-private-subnet[count.index].id
     tags = {
-        Name = "Private NAT-Gateway: NAT Gateway for Private Subnets"
+        Name = "Private NAT-Gateway"
+        description = "This is NAT Gateway for private subnet"
     }   
 }
 
@@ -57,7 +58,8 @@ resource "aws_route_table" "k8s-public-rt" {
         gateway_id = aws_internet_gateway.k8s-public-igw.id
     }
     tags = {
-        Name = "Public-Route-Table: RT for Public Subnets"
+        Name = "public route table"
+        description = "This is public route table"
     }   
 }
 
@@ -69,4 +71,8 @@ resource "aws_route_table" "k8s-private-rt" {
         cidr_block = "0.0.0.0/0"
         nat_gateway_id = aws_nat_gateway.k8s-nat-gateway[0].id
     }
+    tags = {
+        Name = "private route table"
+        description = "This is private route table"
+    } 
 }
