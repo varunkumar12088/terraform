@@ -16,7 +16,7 @@ resource "aws_instance" "ids" {
 
 
 resource "aws_vpc_endpoint" "ssm" {
-  vpc_id       = aws_vpc.main.id
+  vpc_id       = var.vpc_id
   service_name = "com.amazonaws.${var.aws_region}.ssm"
   vpc_endpoint_type = "Interface"
   subnet_ids   = var.private_subnet_ids
@@ -24,7 +24,7 @@ resource "aws_vpc_endpoint" "ssm" {
 }
 
 resource "aws_vpc_endpoint" "ssm_messages" {
-  vpc_id       = aws_vpc.main.id
+  vpc_id       = var.vpc_id
   service_name = "com.amazonaws.${var.aws_region}.ssmmessages"
   vpc_endpoint_type = "Interface"
   subnet_ids   = var.private_subnet_ids
@@ -32,7 +32,7 @@ resource "aws_vpc_endpoint" "ssm_messages" {
 }
 
 resource "aws_vpc_endpoint" "ec2_messages" {
-  vpc_id       = aws_vpc.main.id
+  vpc_id       = var.vpc_id
   service_name = "com.amazonaws.${var.aws_region}.ec2messages"
   vpc_endpoint_type = "Interface"
   subnet_ids   = var.private_subnet_ids
