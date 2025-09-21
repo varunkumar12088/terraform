@@ -5,7 +5,7 @@ output "aws_security_group_id" {
 
 output "aws_iam_role_name" {
     description = "The name of the IAM role"
-    value       = aws_iam_role.ec2-ssm-role.name
+    value       = aws_iam_role.ec2_ssm_role.name
 }
 
 output "ssm_attached_policy" {
