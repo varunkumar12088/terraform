@@ -10,5 +10,5 @@ resource "aws_route_table_association" "private-rt-assoc" {
     count          = length(var.private_subnet_cidrs)
     depends_on     = [ aws_subnet.k8s-private-subnet, aws_route_table.k8s-private-rt ]
     subnet_id      = aws_subnet.k8s-private-subnet[count.index].id
-    route_table_id = aws_route_table.k8s-private-rt.id  
+    route_table_id = aws_route_table.k8s-private-rt[count.index].id  
 }
