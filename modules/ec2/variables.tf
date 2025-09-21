@@ -57,3 +57,10 @@ variable "private_subnet_ids" {
     description = "List of private subnet IDs"
     type        = list(string)
 }
+
+variable "aws_region" {
+    description = "The AWS region"
+    type        = string
+    default     = "ap-south-1"
+  
+}
