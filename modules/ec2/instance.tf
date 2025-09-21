@@ -15,6 +15,7 @@ resource "aws_instance" "ids" {
 }
 
 
+/*
 resource "aws_vpc_endpoint" "ssm" {
   vpc_id       = var.vpc_id
   service_name = "com.amazonaws.${var.aws_region}.ssm"
@@ -38,3 +39,5 @@ resource "aws_vpc_endpoint" "ec2_messages" {
   subnet_ids   = var.private_subnet_ids
   security_group_ids = [aws_security_group.learning_k8s_app_sg.id]
 }
+
+*/
